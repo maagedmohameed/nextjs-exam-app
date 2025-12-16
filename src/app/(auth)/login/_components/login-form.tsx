@@ -17,6 +17,7 @@ import { loginSchema } from "@/lib/schemas/auth.schema";
 import useLogin from "../_hooks/use-login";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import FeedbackForm from "../../_components/feedback-form";
 
 export default function LoginForm() {
   // Mutation
@@ -96,6 +97,7 @@ export default function LoginForm() {
       </Form>
       {/* Footer  */}
       <footer className="flex flex-col gap-[2.25rem] pt-6">
+        {error && <FeedbackForm errorMsg={error.message} />}
         <Button
           type="submit"
           form="login-form"
