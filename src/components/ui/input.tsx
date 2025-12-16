@@ -8,34 +8,33 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { PhoneInput } from "./phone-input";
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, name, ...props }, ref) => {
     const [inputType, setInputType] = React.useState<
       React.HTMLInputTypeAttribute | undefined
     >(type);
-    const [phoneNumber, setPhoneNumber] = React.useState("");
+    // const [phoneNumber, setPhoneNumber] = React.useState("");
 
     /*  Phone Type */
-    if (type === "phone") {
-      return (
-        <div className="relative">
-          <PhoneInput
-            className="peer"
-            defaultCountry="EG"
-            initialValueFormat="national"
-            international
-          />
+    // if (type === "phone") {
+    //   return (
+    //     <div className="relative">
+    //       <PhoneInput
+    //         className="peer"
+    //         defaultCountry="EG"
+    //         initialValueFormat="national"
+    //         international
+    //       />
 
-          <span
-            className={`absolute left-1/3 top-4 text-sm font-normal text-gray-400 ${phoneNumber ? "hidden" : "block"}`}
-          >
-            1012345678
-          </span>
-        </div>
-      );
-    }
+    //       <span
+    //         className={`absolute left-1/3 top-4 text-sm font-normal text-gray-400 ${phoneNumber ? "hidden" : "block"}`}
+    //       >
+    //         1012345678
+    //       </span>
+    //     </div>
+    //   );
+    // }
     /*  OTP Type */
     if (type === "otp") {
       return (

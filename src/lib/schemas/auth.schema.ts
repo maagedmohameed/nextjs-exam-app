@@ -69,7 +69,9 @@ export const registerSchema = z
       .nonempty({ message: "Phone number is required" })
       .refine(isValidPhoneNumber, {
         message: "Please enter a valid phone number",
-      }),
+      })
+      .transform((val) => Number(val.replace(/\D+/g, ""))),
+
     // .transform((val) => val.replace(/\D+/g, ""))
     // .pipe(z.coerce.number())
     rePassword: z.string(),

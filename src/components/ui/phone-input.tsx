@@ -62,7 +62,14 @@ const InputComponent = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input">
 >(({ className, ...props }, ref) => (
-  <Input className={cn("w-full", className)} {...props} ref={ref} />
+  <Input
+    className={cn(
+      "w-full aria-[invalid=true]:border-red-600 aria-[invalid=true]:focus-visible:border-red-600",
+      className,
+    )}
+    {...props}
+    ref={ref}
+  />
 ));
 InputComponent.displayName = "InputComponent";
 
