@@ -34,7 +34,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt: ({ token, user }) => {
       if (user) {
         token.accessToken = user.accessToken;
         token.user = user.user;

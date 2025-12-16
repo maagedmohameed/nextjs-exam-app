@@ -9,7 +9,6 @@ export async function loginService(fields: LoginFormFields) {
         "Content-Type": "application/json",
       },
     });
-
     const payload: ApiResponse<LoginResponse> = await response.json();
 
     return payload;

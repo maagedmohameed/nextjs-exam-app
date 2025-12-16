@@ -1,10 +1,12 @@
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
-const authRoutes = ["/login", "/register", "forgot-password"];
+const authRoutes = ["/login", "/register"];
 const publicRoutes = ["/", ...authRoutes];
 
 export default async function middleware(request: NextRequest) {
+  // return NextResponse.next();
+
   const token = await getToken({ req: request });
 
   if (!publicRoutes.includes(request.nextUrl.pathname)) {
@@ -13,6 +15,7 @@ export default async function middleware(request: NextRequest) {
     const redirectUrl = new URL("/login", request.nextUrl.origin);
 
     redirectUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+    console.log("got you");
 
     return NextResponse.redirect(redirectUrl);
   }
