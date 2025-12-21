@@ -15,7 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormFields } from "@/lib/types/auth";
 import { loginSchema } from "@/lib/schemas/auth.schema";
 import useLogin from "../_hooks/use-login";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import FeedbackForm from "../../_components/feedback-form";
 
@@ -50,16 +49,14 @@ export default function LoginForm() {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
-              <FormItem>
+            render={({ field, fieldState }) => (
+              <FormItem data-invalid={fieldState.invalid}>
                 {/* Label */}
-                <FormLabel>
-                  <Label>Email</Label>
-                </FormLabel>
+                <FormLabel>Email</FormLabel>
                 {/* Input Field */}
                 <FormControl>
                   <Input
-                    aria-invalid={!!form.formState.errors.email}
+                    aria-invalid={fieldState.invalid}
                     type="email"
                     {...field}
                   />
@@ -71,23 +68,22 @@ export default function LoginForm() {
           />
           {/* Password  */}
           <FormField
-            aria-invalid={!!form.formState.errors.password}
             control={form.control}
             name="password"
-            render={({ field }) => (
-              <FormItem>
+            render={({ field, fieldState }) => (
+              <FormItem data-invalid={fieldState.invalid}>
                 {/* Label */}
-                <FormLabel>
-                  <Label>Password</Label>
-                </FormLabel>
+                <FormLabel>Password</FormLabel>
+
                 {/* Input Field */}
                 <FormControl>
                   <Input
-                    aria-invalid={!!form.formState.errors.password}
+                    aria-invalid={fieldState.invalid}
                     type="password"
                     {...field}
                   />
                 </FormControl>
+
                 {/* Feedback Message  */}
                 <FormMessage />
               </FormItem>

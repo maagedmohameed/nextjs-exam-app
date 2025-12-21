@@ -88,4 +88,66 @@ export const registerSchema = z
     },
   });
 
-export const forgotPasswordSchema = loginSchema.pick({ email: true });
+export const forgotPasswordSchema = z
+  .object({
+    email: z
+      .string()
+      .nonempty({ message: "Email is required" })
+      .trim()
+      .toLowerCase()
+      // .min(1, { message: "Your email is required" })
+      // .refine((val) => val !== "", {
+      //   error: "Your email is required",
+      //   path: ["required"],
+      // })
+      .and(
+        z
+          .email({
+            message: "Please enter a valid email",
+          })
+          .min(5, "Email is too short !")
+          .max(128, "Email is too long !"),
+      ),
+    password: z
+      .string()
+      .nonempty({ message: "Password is required" })
+      .trim()
+      .min(8, { message: "Password must be at least 8 characters long" })
+      .max(20, { message: "Password must be at most 20 characters long" })
+      .regex(/[A-Z]/, {
+        message: "Password must contain at least one uppercase letter",
+      })
+      .regex(/[a-z]/, {
+        message: "Password must contain at least one lowercase letter",
+      })
+      .regex(/[0-9]/, { message: "Password must contain at least one number" })
+      .regex(/[!@#$%^&*()_\-+={[}\]|:;"'<,>.?]/, {
+        message: "Password must contain at least one special character",
+      }),
+    newPassword: z.string(),
+    resetCode: z
+      .string()
+      .nonempty({ message: "Invalid OTP" })
+      .regex(/^\d{6}$/, {
+        message: "OTP must be exactly 4 digits",
+      }),
+  })
+  .refine((data) => data.password === data.newPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+
+    // run if password & confirmPassword are valid
+    when(payload) {
+      return registerSchema
+        .pick({ password: true, rePassword: true })
+        .safeParse(payload.value).success;
+    },
+  });
+export const verifyEmailSchema = loginSchema.pick({ email: true });
+export const verifyResetCodeSchema = forgotPasswordSchema.pick({
+  resetCode: true,
+});
+export const resetPasswordSchema = forgotPasswordSchema.pick({
+  email: true,
+  newPassword: true,
+});

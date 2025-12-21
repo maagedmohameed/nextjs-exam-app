@@ -3,11 +3,6 @@
 import * as React from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/tailwind-merge";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 
 const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
   ({ className, type, name, ...props }, ref) => {
@@ -36,20 +31,20 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
     //   );
     // }
     /*  OTP Type */
-    if (type === "otp") {
-      return (
-        <InputOTP maxLength={6}>
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
-      );
-    }
+    // if (type === "otp") {
+    //   return (
+    //     <InputOTP maxLength={6}>
+    //       <InputOTPGroup>
+    //         <InputOTPSlot index={0} />
+    //         <InputOTPSlot index={1} />
+    //         <InputOTPSlot index={2} />
+    //         <InputOTPSlot index={3} />
+    //         <InputOTPSlot index={4} />
+    //         <InputOTPSlot index={5} />
+    //       </InputOTPGroup>
+    //     </InputOTP>
+    //   );
+    // }
 
     return (
       <span className="relative">
