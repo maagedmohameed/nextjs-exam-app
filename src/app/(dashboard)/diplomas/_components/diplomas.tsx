@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { getInfiniteSubjects } from "@/lib/apis/subject.api";
+import { ChevronDown } from "lucide-react";
 
 export default function Diplomas() {
   // Query
@@ -29,7 +30,6 @@ export default function Diplomas() {
   // Vars
   const subjects = payload?.pages.flatMap((page) => page.subjects) ?? [];
   return (
-    // Infinite Scroll
     <InfiniteScroll
       dataLength={subjects.length}
       next={fetchNextPage}

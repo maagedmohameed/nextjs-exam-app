@@ -1,5 +1,5 @@
 import Diplomas from "./_components/diplomas";
 
-export default function DashboardPage() {
+export default function DiplomasPage() {
   return <Diplomas />;
 }

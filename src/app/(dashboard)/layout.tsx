@@ -1,11 +1,10 @@
+import { ChevronDown } from "lucide-react";
 import Image from "next/image";
-
 import elevateLogo from "/public/assets/images/elevate-logo.png";
-import folderCode from "/public/assets/icons/folder-code.png";
-import NavLinks from "./_components/nav-links";
-import { ChevronDown, EllipsisVertical } from "lucide-react";
 import { Breadcrumbs } from "./_components/breadcrumb";
-import Header from "./_components/Header";
+import Header from "./_components/header";
+import NavLinks from "./_components/nav-links";
+import UserInfo from "./_components/user-info";
 
 export default function DashboardLayout({
   children,
@@ -13,20 +12,20 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen w-screen text-white">
+    <section className="flex h-screen">
       {/* Sidebar  */}
-      <aside className="flex h-auto w-[22.625rem] flex-col gap-[3.75rem] border-r bg-blue-50 p-10">
+      <aside className="flex h-full w-[22.625rem] flex-col gap-[3.75rem] border-r bg-blue-50 p-10">
         {/* Logo  */}
-        <div className="flex flex-col gap-[0.625rem]">
+        <header className="flex flex-col gap-[0.625rem]">
           {/* Elevate logo  */}
           <Image src={elevateLogo} alt="elevate-logo" />
           {/* Exam app logo  */}
           <div className="flex w-fit items-center gap-[0.625rem]">
             {/* lucide/folder-code */}
-            <span className="flex h-[2.5rem] w-[2.5rem] justify-center gap-3 p-2">
+            <span className="flex size-[1.875rem] items-center justify-center gap-[0.625rem]">
               <svg
                 width="30"
-                height="26"
+                height="25.5"
                 viewBox="0 0 30 26"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -47,63 +46,32 @@ export default function DashboardLayout({
               </svg>
             </span>
             {/* Text */}
-            <p className="align-middle text-xl font-semibold text-blue-600">
-              Exam App
-            </p>
+            <p className="text-xl font-semibold text-blue-600">Exam App</p>
           </div>
-        </div>
+        </header>
+
         {/* Navigation  */}
-        <div className="flex h-screen flex-col justify-between">
+        <nav className="flex flex-1 flex-col justify-between">
           {/* Links  */}
-          <ul className="flex h-auto flex-col gap-[0.625rem]">
-            {/* Items  */}
-            <NavLinks />
-          </ul>
+          <NavLinks />
 
           {/* User  */}
-          <div className="flex items-center justify-between">
-            {/* User info  */}
-            <div className="flex gap-[0.625rem]">
-              {/* Avatar  */}
-              <Image
-                src="/assets/images/avatar.png"
-                alt="avatar"
-                width={54}
-                height={54}
-                className="border border-blue-600"
-              />
-              {/* info  */}
-              <div className="flex flex-col justify-center">
-                {/* Name  */}
-                <p className="text-base font-medium text-blue-600">FirstName</p>
-                {/* Email  */}
-                <p className="text-sm font-normal text-gray-500">
-                  user-email@example.com
-                </p>
-              </div>
-            </div>
-            {/* Menu  */}
-            <div className="flex h-7 w-7 items-center justify-center gap-[0.625rem]">
-              {/* lucide/ellipsis-vertical icon  */}
-              <EllipsisVertical
-                className="h-[1.125rem] w-[1.125rem] text-gray-500"
-                strokeWidth={0.94}
-              />
-            </div>
-          </div>
-        </div>
+          <UserInfo />
+        </nav>
       </aside>
 
-      {/* Main content  */}
-      <section className="flex flex-1 flex-col text-gray-50">
+      {/* Content  */}
+      <section className="flex h-full flex-1 flex-col bg-gray-50">
         {/* Breadcrumbs  */}
         <Breadcrumbs />
         {/* Main Content  */}
-        <div className="flex h-screen flex-col gap-6 p-6">
+        <section className="flex flex-1 flex-col gap-6 bg-gray-50 p-6">
           {/* Heading  */}
           <Header />
           {/* Children content */}
-          <div className="flex items-center gap-[0.625rem]">{children}</div>
+          <main className="flex flex-1 gap-[0.625rem] overflow-y-auto">
+            {children}
+          </main>
           {/* Footer  */}
           <footer className="flex flex-col items-center justify-center gap-1 p-[0.625rem]">
             {/* Text */}
@@ -112,12 +80,12 @@ export default function DashboardLayout({
             </p>
             {/* lucide/chevron-down icon  */}
             <ChevronDown
-              className="h-[1.125rem] w-[1.125rem] text-gray-400"
+              className="size-[1.125rem] text-gray-400"
               strokeWidth={0.94}
             />
           </footer>
-        </div>
+        </section>
       </section>
-    </div>
+    </section>
   );
 }

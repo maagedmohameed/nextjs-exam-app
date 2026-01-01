@@ -1,20 +1,18 @@
 "use client";
 
 import { GraduationCap, UserRound } from "lucide-react";
-
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-
 import { cn } from "@/lib/tailwind-merge";
 
 const navLinks = [
   {
-    name: "Diplomas",
+    name: "diplomas",
     href: "/diplomas",
     icon: GraduationCap,
   },
   {
-    name: "Account Settings",
+    name: "account Settings",
     href: "/account",
     icon: UserRound,
   },
@@ -24,7 +22,7 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <ul className="flex h-auto flex-col gap-[0.625rem]">
+    <ul className="flex flex-col gap-[0.625rem]">
       {/* Items  */}
       {navLinks.map((link) => (
         <li
@@ -37,16 +35,16 @@ export default function NavLinks() {
           {/* Icon */}
           <link.icon
             className={cn(
-              "h-6 w-6 text-gray-500",
+              "size-6 text-gray-500",
               pathname === link.href && "text-blue-600",
             )}
-            strokeWidth={"1.25px"}
+            strokeWidth={1.25}
           />
           {/* Text */}
           <Link
             href={link.href}
             className={cn(
-              "content-center text-base font-normal text-gray-500",
+              "content-center capitalize text-gray-500",
               pathname === link.href && "text-blue-600",
             )}
           >
